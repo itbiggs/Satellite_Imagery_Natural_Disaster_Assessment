@@ -1,0 +1,130 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "xbd-damage-assessment"
+version = "0.1.0"
+description = "Production-quality deep learning pipeline for satellite imagery disaster damage assessment using xBD/xView2 dataset"
+readme = "README.md"
+requires-python = ">=3.9,<3.12"
+license = {text = "MIT"}
+authors = [
+    {name = "Isaac Biggs", email = "your.email@example.com"}
+]
+keywords = ["deep-learning", "computer-vision", "disaster-response", "satellite-imagery", "pytorch", "geospatial"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = [
+    # Core ML
+    "torch>=2.1.0,<2.3.0",
+    "torchvision>=0.16.0,<0.18.0",
+    "segmentation-models-pytorch>=0.3.3",
+
+    # Geospatial
+    "rasterio>=1.3.9",
+    "shapely>=2.0.2",
+    "geopandas>=0.14.1",
+    "pyproj>=3.6.1",
+    "fiona>=1.9.5",
+
+    # Computer Vision
+    "opencv-python-headless>=4.8.1",
+    "albumentations>=1.3.1",
+    "scikit-image>=0.22.0",
+
+    # Data & Numeric
+    "numpy>=1.24.0,<2.0.0",
+    "pandas>=2.1.4",
+    "scipy>=1.11.4",
+
+    # ML Ops & Tracking
+    "wandb>=0.16.1",
+    "tensorboard>=2.15.1",
+    "pytorch-lightning>=2.1.3",
+
+    # Utilities
+    "tqdm>=4.66.1",
+    "pyyaml>=6.0.1",
+    "omegaconf>=2.3.0",
+    "hydra-core>=1.3.2",
+    "python-dotenv>=1.0.0",
+
+    # Visualization
+    "matplotlib>=3.8.2",
+    "seaborn>=0.13.0",
+    "plotly>=5.18.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.3",
+    "pytest-cov>=4.1.0",
+    "pytest-mock>=3.12.0",
+    "black>=23.12.1",
+    "isort>=5.13.2",
+    "flake8>=7.0.0",
+    "mypy>=1.8.0",
+    "pre-commit>=3.6.0",
+]
+
+deployment = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.25.0",
+    "psycopg2-binary>=2.9.9",
+    "sqlalchemy>=2.0.25",
+    "geoalchemy2>=0.14.3",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/xbd-damage-assessment"
+Repository = "https://github.com/yourusername/xbd-damage-assessment"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--verbose --cov=src/xbd_damage_assessment --cov-report=html --cov-report=term"
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+ensure_newline_before_comments = true
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true

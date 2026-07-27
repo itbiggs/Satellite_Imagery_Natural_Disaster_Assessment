@@ -1,0 +1,45 @@
+# Core ML Framework
+torch==2.1.2
+torchvision==0.16.2
+segmentation-models-pytorch==0.3.3
+
+# Geospatial Libraries
+rasterio==1.3.9
+shapely==2.0.2
+geopandas==0.14.1
+pyproj==3.6.1
+fiona==1.9.5
+
+# Computer Vision
+opencv-python-headless==4.8.1.78
+albumentations==1.3.1
+scikit-image==0.22.0
+
+# Data & Numeric Computing
+numpy==1.26.2
+pandas==2.1.4
+scipy==1.11.4
+
+# ML Ops & Experiment Tracking
+wandb==0.16.1
+tensorboard==2.15.1
+pytorch-lightning==2.1.3
+
+# Configuration & Utilities
+tqdm==4.66.1
+PyYAML==6.0.1
+omegaconf==2.3.0
+hydra-core==1.3.2
+python-dotenv==1.0.0
+
+# Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.18.0
+
+# Development Tools (optional - install with: pip install -r requirements-dev.txt)
+# pytest==7.4.3
+# pytest-cov==4.1.0
+# black==23.12.1
+# isort==5.13.2
+# flake8==7.0.0
