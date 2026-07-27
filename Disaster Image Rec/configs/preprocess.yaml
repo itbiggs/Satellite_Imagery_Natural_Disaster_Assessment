@@ -1,0 +1,55 @@
+# xBD Data Preprocessing Configuration
+
+# Data paths
+data:
+  raw_root: "data/raw/xbd"  # Root directory of raw xBD dataset
+  processed_root: "data/processed"  # Output directory for processed data
+  interim_root: "data/interim"  # Temporary/intermediate outputs
+
+# Tiling parameters
+tiling:
+  tile_size: 512  # Size of square tiles (pixels)
+  overlap: 64  # Overlap between adjacent tiles (pixels)
+  min_tile_size: 256  # Minimum tile size to keep (discard smaller edge tiles)
+  min_building_pixels: 100  # Minimum building pixels required to keep a tile (0 = keep all)
+
+# Train/val/test split
+split:
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+  random_seed: 42
+
+# Damage class configuration
+damage_classes:
+  num_classes: 4
+  class_names:
+    - "no-damage"
+    - "minor-damage"
+    - "major-damage"
+    - "destroyed"
+  # Mapping from xBD subtype strings to class IDs
+  class_mapping:
+    "no-damage": 0
+    "minor-damage": 1
+    "major-damage": 2
+    "destroyed": 3
+    "un-classified": 0  # Treat unclassified as no-damage
+
+# Processing options
+processing:
+  generate_building_masks: true  # Generate binary building masks (localization)
+  generate_damage_masks: true  # Generate 4-class damage masks (classification)
+  save_visualizations: false  # Save visualization overlays (for debugging)
+  num_workers: 4  # Parallel processing workers (0 = disable multiprocessing)
+
+# Image processing
+image:
+  save_format: "png"  # Output image format
+  compression: 1  # PNG compression level (0-9, higher = more compression)
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  save_logs: true
+  log_file: "logs/preprocessing.log"
