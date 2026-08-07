@@ -1,0 +1,30 @@
+# Training configuration for building localization
+
+task: "localization"
+seed: 42
+use_gpu: true
+
+# Data configuration
+data:
+  root: "data"
+  image_size: 512
+
+# Model configuration
+model:
+  encoder: "resnet34"  # resnet34, resnet50, efficientnet-b0, etc.
+  pretrained: "imagenet"
+
+# Training configuration
+training:
+  epochs: 30
+  batch_size: 8
+  num_workers: 4
+  lr: 0.001
+  weight_decay: 0.0001
+  optimizer: "adam"  # adam or sgd
+  loss: "combined"  # bce or combined (BCE + Dice)
+
+# Output configuration
+output:
+  checkpoint_dir: "checkpoints/localization"
+  log_dir: "logs/localization"
