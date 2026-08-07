@@ -221,10 +221,6 @@ pre-commit run --all-files
 
 MIT License - see LICENSE file for details
 
-## Contact
-
-Isaac Biggs - [GitHub](https://github.com/yourusername) | [LinkedIn](https://linkedin.com/in/yourprofile)
-
 ---
 
 Built with PyTorch, Rasterio, Shapely, and FastAPI.
