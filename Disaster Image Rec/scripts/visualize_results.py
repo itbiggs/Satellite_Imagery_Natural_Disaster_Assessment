@@ -148,7 +148,7 @@ def generate_visualizations(checkpoint_path, output_dir, num_samples=5):
     print(f"Loading checkpoint: {checkpoint_path}")
 
     # Load checkpoint
-    checkpoint = torch.load(checkpoint_path, map_location="cpu")
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     config = checkpoint["config"]
     task = config["task"]
 

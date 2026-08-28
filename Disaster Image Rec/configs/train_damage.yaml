@@ -18,7 +18,7 @@ model:
 
 # Training configuration
 training:
-  epochs: 30
+  epochs: 5  # Reduced for quick demo (was 30)
   batch_size: 8
   num_workers: 4
   lr: 0.001
