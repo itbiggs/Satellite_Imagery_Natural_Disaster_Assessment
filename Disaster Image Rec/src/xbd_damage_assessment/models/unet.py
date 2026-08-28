@@ -192,6 +192,8 @@ def get_model(task: str, **kwargs):
         Model instance
     """
     if task == "localization":
+        # Remove num_classes for localization (binary segmentation)
+        kwargs.pop("num_classes", None)
         return BuildingLocalizationModel(**kwargs)
     elif task == "damage":
         architecture = kwargs.pop("architecture", "concat")  # or 'siamese'

@@ -2,23 +2,23 @@
 
 task: "localization"
 seed: 42
-use_gpu: true
+use_gpu: false  # CPU training for compatibility
 
 # Data configuration
 data:
   root: "data"
-  image_size: 512
+  image_size: 256  # Reduced from 512 for faster training
 
 # Model configuration
 model:
-  encoder: "resnet34"  # resnet34, resnet50, efficientnet-b0, etc.
+  encoder: "resnet18"  # Smaller encoder for faster training
   pretrained: "imagenet"
 
 # Training configuration
 training:
-  epochs: 30
-  batch_size: 8
-  num_workers: 4
+  epochs: 3  # Quick training for demo
+  batch_size: 4  # Smaller batch for CPU
+  num_workers: 0  # Single worker for CPU stability
   lr: 0.001
   weight_decay: 0.0001
   optimizer: "adam"  # adam or sgd

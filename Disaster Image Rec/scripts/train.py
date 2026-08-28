@@ -115,6 +115,8 @@ def train(config):
 
     # Task
     task = config["task"]
+    # Convert 'damage' to 'damage_classification' for dataset
+    dataset_task = "damage_classification" if task == "damage" else task
     print(f"\n{'='*60}")
     print(f"Training {task} model")
     print(f"{'='*60}\n")
@@ -124,14 +126,14 @@ def train(config):
     train_dataset = xBDDataset(
         data_root=config["data"]["root"],
         split="train",
-        task=task,
+        task=dataset_task,
         transform=xBDDataset.get_default_transform("train", config["data"]["image_size"]),
     )
 
     val_dataset = xBDDataset(
         data_root=config["data"]["root"],
         split="val",
-        task=task,
+        task=dataset_task,
         transform=xBDDataset.get_default_transform("val", config["data"]["image_size"]),
     )
 
@@ -186,7 +188,7 @@ def train(config):
 
     # Scheduler
     scheduler = ReduceLROnPlateau(
-        optimizer, mode="max", factor=0.5, patience=5, verbose=True
+        optimizer, mode="max", factor=0.5, patience=5
     )
 
     # Training loop

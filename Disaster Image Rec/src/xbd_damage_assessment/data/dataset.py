@@ -86,8 +86,9 @@ class xBDDataset(Dataset):
             return []
 
         # Find all image files
-        image_files = sorted(processed_dir.glob("*_pre_*.png"))
-        tile_ids = [f.stem for f in image_files]
+        image_files = sorted(processed_dir.glob("*_pre.png"))
+        # Remove the "_pre" suffix to get tile IDs
+        tile_ids = [f.stem.replace("_pre", "") for f in image_files]
 
         logger.info(f"Discovered {len(tile_ids)} tiles in {processed_dir}")
         return tile_ids
@@ -134,12 +135,16 @@ class xBDDataset(Dataset):
 
         if self.task == "localization":
             # Load pre-disaster image and building mask
-            image_path = processed_dir / "images" / f"{tile_id}.png"
+            image_path = processed_dir / "images" / f"{tile_id}_pre.png"
             mask_path = processed_dir / "masks_building" / f"{tile_id}.png"
 
             image = cv2.imread(str(image_path), cv2.IMREAD_COLOR)
+            if image is None:
+                raise FileNotFoundError(f"Could not load image: {image_path}")
             image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
             mask = cv2.imread(str(mask_path), cv2.IMREAD_GRAYSCALE)
+            if mask is None:
+                raise FileNotFoundError(f"Could not load mask: {mask_path}")
 
             return {"image": image, "mask": mask}
 
